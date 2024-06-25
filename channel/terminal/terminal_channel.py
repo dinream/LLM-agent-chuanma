@@ -2,7 +2,7 @@ import sys
 
 from bridge.context import *
 from bridge.reply import Reply, ReplyType
-from channel.chat_channel import ChatChannel, check_prefix
+from channel.chat_channel import ChatChannel
 from channel.chat_message import ChatMessage
 from common.log import logger
 from config import conf
@@ -74,12 +74,11 @@ class TerminalChannel(ChatChannel):
                 sys.exit()
             msg_id += 1
             trigger_prefixs = conf().get("single_chat_prefix", [""])
-            if check_prefix(prompt, trigger_prefixs) is None:
-                prompt = trigger_prefixs[0] + prompt  # 给没触发的消息加上触发前缀
 
             context = self._compose_context(ContextType.TEXT, prompt, msg=TerminalMessage(msg_id, prompt))
             if context:
-                self.produce(context)
+                reply = self._generate_reply()
+                logger.info(reply)
             else:
                 raise Exception("context is None")
 

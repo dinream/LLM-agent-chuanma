@@ -12,7 +12,7 @@ import json
 
 from bridge.context import *
 from bridge.reply import *
-from channel.chat_channel import ChatChannel, check_prefix
+from channel.chat_channel import ChatChannel
 from channel import chat_channel
 from channel.hlmj.hlmj_message import *
 from common.expired_dict import ExpiredDict
@@ -61,6 +61,7 @@ class HLMJChannel(ChatChannel):
         while True:
             while True:
                 # 循环检测是否开了游戏
+                break # 测试 api
                 try:
                     ishlmj,_ = find_image_on_screen("image/start.png")
                     logger.info("Please open the game ...")
@@ -77,16 +78,17 @@ class HLMJChannel(ChatChannel):
             msg_id = 0
             while True:
                 # 获取输入
-                prompt = self.get_input()
+                # 测试api prompt = self.get_input()
+                prompt =  json.dumps(self.curenv, indent=4)
                 msg_id += 1
                 print(prompt)
                 # 结合历史出牌信息和当前的出牌信息向大模型请求下一次出牌请求
                 context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
                 if context:
-                    self.produce(context)
+                    self._generate_reply(context)
                 else:
                     raise Exception("context is None")
-            
+                time.sleep(10)
             # 将出牌请求转换为鼠标动作
             # 验证最终出牌动作
     # 统一的发送函数，每个Channel自行实现，根据reply的type字段发送不同类型的消息
