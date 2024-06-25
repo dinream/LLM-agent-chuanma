@@ -124,7 +124,7 @@ class HLMJChannel(ChatChannel):
                     self.newgame()
                     break
                 # 继续游戏
-                istype, matches = find_image_on_screen("image/Con.png")
+                istype, matches = find_image_on_screen("image/1Con.png")
                 if istype:  # 点击换对手
                     click(matches[0])
                     self.newgame()
