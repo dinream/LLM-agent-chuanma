@@ -114,8 +114,13 @@ class HLMJChannel(ChatChannel):
 
         self.curenv["CurTask"] = 0
         while True:
+            # 结束
+            istype,matches = find_image_on_screen("image/Win.png")
+            if istype:
+                # 点击
+                break
+            
             #! 识别任务
-            break
             istype,_ = find_image_on_screen("image/SelectType.png")
             if istype:
                 self.curenv["CurTask"] = 1

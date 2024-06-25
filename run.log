@@ -2889,3 +2889,794 @@ Traceback (most recent call last):
     e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
                 ^^^^^^^^^^^^^
 NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:02:02][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:02:02][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:02:02][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:02:03][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:02:04][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:02:05][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:02:06][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:02:07][hlmj_channel.py:56] - Detecting the game ...
+[ERROR][2024-06-25 19:02:07][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:02:07][main.py:58] - setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (3,) + inhomogeneous part.
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 55, in startup
+    ishlmj,_ = find_image_on_screen("image/start.png")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 79, in find_image_on_screen
+    matches = multi_scale_template_matching(screen, target_image, threshold=threshold)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 37, in multi_scale_template_matching
+    if not any(is_close(target_center, match) for match in matches):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 37, in <genexpr>
+    if not any(is_close(target_center, match) for match in matches):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 17, in is_close
+    return np.linalg.norm(np.array(pt1) - np.array(pt2)) < threshold
+                                          ^^^^^^^^^^^^^
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (3,) + inhomogeneous part.
+[INFO][2024-06-25 19:05:42][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:05:42][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:05:42][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:05:43][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:05:44][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:05:45][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:05:46][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:05:47][hlmj_channel.py:56] - Detecting the game ...
+[ERROR][2024-06-25 19:05:48][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:05:48][main.py:58] - not enough values to unpack (expected 3, got 2)
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 55, in startup
+    ishlmj,_ = find_image_on_screen("image/start.png")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 103, in find_image_on_screen
+    matches = orb_feature_matching(screen, target_image, matches)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 14, in orb_feature_matching
+    for (center, h, w) in matches:
+        ^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 2)
+[INFO][2024-06-25 19:10:29][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:10:29][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:10:29][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:10:30][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:10:31][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:10:32][hlmj_channel.py:56] - Detecting the game ...
+[ERROR][2024-06-25 19:10:33][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:10:33][main.py:58] - setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (3,) + inhomogeneous part.
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 55, in startup
+    ishlmj,_ = find_image_on_screen("image/start.png")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 101, in find_image_on_screen
+    matches = multi_scale_template_matching(screen, target_image, threshold=threshold)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 73, in multi_scale_template_matching
+    if not any(is_close(target_center, match) for match in matches):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 73, in <genexpr>
+    if not any(is_close(target_center, match) for match in matches):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 44, in is_close
+    return np.linalg.norm(np.array(pt1) - np.array(pt2)) < threshold
+                                          ^^^^^^^^^^^^^
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (3,) + inhomogeneous part.
+[INFO][2024-06-25 19:16:00][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:16:00][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:16:00][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:16:02][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:16:03][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:16:04][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:16:05][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:16:06][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:16:06][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:16:18][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:16:21][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:16:21][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:16:22][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:16:23][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:16:24][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:16:25][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:16:26][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:16:27][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:16:27][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:16:29][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:16:31][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:16:31][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:18:34][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:18:34][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:18:34][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:18:36][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:18:37][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:18:38][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:18:39][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:18:39][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:18:39][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:18:50][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:18:52][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:18:53][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:18:53][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:18:54][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:18:55][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:18:56][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:18:57][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:18:58][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:18:59][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:19:00][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:19:02][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:19:02][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:24:00][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:24:00][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:24:00][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:24:01][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:24:01][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:24:12][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:24:14][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:24:15][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:24:15][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:24:16][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:24:17][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:24:18][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:24:19][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:24:20][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:24:20][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:24:22][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:24:24][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:24:24][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:25:01][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:25:01][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:25:01][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:25:02][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:25:02][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:25:13][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:25:16][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:25:16][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:25:17][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:25:17][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:25:19][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:25:20][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:25:21][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:25:22][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:25:23][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:25:24][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:25:26][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:25:26][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:26:07][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:26:07][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:26:07][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:26:08][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:26:08][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:26:20][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:26:22][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:26:23][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:26:23][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:26:24][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:26:25][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:26:26][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:26:27][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:26:28][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:26:28][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:26:30][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:26:32][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:26:32][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:27:32][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:27:32][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:27:32][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:27:33][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:27:33][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:27:44][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:27:47][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:27:47][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:27:48][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:27:48][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:27:49][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:27:50][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:27:51][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:27:52][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:27:53][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:27:54][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:27:56][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:27:56][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:28:08][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:28:08][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:28:08][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:28:09][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:28:09][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:28:20][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:28:23][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:28:23][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:28:24][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:28:24][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:28:25][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:28:26][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:28:27][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:28:28][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:28:29][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:28:30][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:28:32][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:28:32][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:29:12][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:29:12][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:29:12][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:29:13][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:29:13][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:29:24][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:29:26][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:29:26][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:29:27][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:29:27][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:29:29][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:29:29][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:29:31][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:29:31][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:29:32][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:29:34][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:29:36][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:29:36][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:30:00][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:30:00][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:30:00][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:30:01][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:30:01][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:30:10][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:30:12][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:30:13][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:30:13][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:30:14][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:30:15][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:30:15][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:30:16][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:30:17][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:30:17][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:30:19][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:30:20][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:30:20][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:39:23][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:39:23][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:39:23][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:39:24][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:39:25][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:39:25][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:39:25][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:39:34][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:39:36][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:39:37][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:39:37][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:39:37][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:39:39][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:39:39][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:39:40][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:39:41][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:39:41][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:39:42][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:39:44][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:39:44][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:40:01][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:40:01][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:40:01][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:40:02][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:40:02][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:40:10][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:40:12][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:40:12][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:40:13][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:40:13][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:40:14][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:40:14][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:40:16][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:40:16][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:40:17][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:40:18][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:40:19][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:40:19][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:41:15][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:41:15][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:41:15][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:41:15][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:41:15][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:41:24][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:41:25][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:41:26][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:41:26][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:41:27][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:41:28][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:41:28][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:41:29][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:41:30][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:41:30][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:41:32][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:41:33][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:41:33][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:43:26][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:43:26][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:43:26][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:43:27][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:43:27][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:43:35][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:43:38][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:43:38][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:43:39][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:43:40][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:43:40][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:43:41][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:43:42][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:43:43][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:43:44][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:43:46][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:43:46][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:44:11][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:44:11][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:44:11][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:44:12][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:44:12][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:44:21][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:44:23][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:44:23][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:44:23][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:44:24][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:44:25][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:44:25][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:44:26][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:44:27][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:44:27][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:44:29][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:44:30][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:44:30][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:44:43][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:44:43][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:44:43][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:44:44][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:44:44][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:44:52][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:44:54][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:44:55][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:44:55][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:44:55][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:44:57][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:44:57][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:44:58][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:44:59][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:44:59][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:45:00][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:45:02][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:45:02][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:45:15][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:45:15][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:45:15][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:45:16][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:45:16][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:45:24][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:45:26][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:45:27][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:45:27][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:45:27][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:45:29][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:45:29][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:45:30][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:45:31][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:45:31][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:45:32][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:45:34][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:45:34][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:45:46][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:45:46][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:45:46][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:45:47][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:45:47][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:45:56][imgIdtfy.py:124] - find image/w\1.png
+[INFO][2024-06-25 19:45:58][imgIdtfy.py:124] - find image/w\4.png
+[INFO][2024-06-25 19:45:58][imgIdtfy.py:124] - find image/w\5.png
+[INFO][2024-06-25 19:45:58][imgIdtfy.py:124] - find image/w\6.png
+[INFO][2024-06-25 19:45:59][imgIdtfy.py:124] - find image/w\7.png
+[INFO][2024-06-25 19:46:00][imgIdtfy.py:124] - find image/w\9.png
+[INFO][2024-06-25 19:46:00][imgIdtfy.py:124] - find image/o\1.png
+[INFO][2024-06-25 19:46:01][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:46:02][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:46:03][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:46:04][imgIdtfy.py:124] - find image/o\7.png
+[ERROR][2024-06-25 19:46:05][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:46:05][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 19:54:17][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 19:54:17][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 19:54:17][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 19:54:18][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:19][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:20][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:21][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:21][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:22][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:23][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:24][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:24][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:25][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:26][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:27][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:28][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:29][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:30][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:30][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:31][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:32][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:33][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:34][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 19:54:34][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 19:54:38][imgIdtfy.py:124] - find image/l\4.png
+[INFO][2024-06-25 19:54:39][imgIdtfy.py:124] - find image/l\5.png
+[INFO][2024-06-25 19:54:41][imgIdtfy.py:124] - find image/l\8.png
+[INFO][2024-06-25 19:54:41][imgIdtfy.py:124] - find image/l\9.png
+[INFO][2024-06-25 19:54:52][imgIdtfy.py:124] - find image/o\2.png
+[INFO][2024-06-25 19:54:52][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 19:54:53][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 19:54:53][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 19:54:54][imgIdtfy.py:124] - find image/o\6.png
+[INFO][2024-06-25 19:54:56][imgIdtfy.py:124] - find image/o\9.png
+[ERROR][2024-06-25 19:54:56][main.py:57] - App startup failed!
+[ERROR][2024-06-25 19:54:56][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 20:04:07][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 20:04:07][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 20:04:07][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 20:04:08][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 20:04:08][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 20:04:11][imgIdtfy.py:124] - find image/l\4.png
+[INFO][2024-06-25 20:04:12][imgIdtfy.py:124] - find image/l\5.png
+[INFO][2024-06-25 20:04:14][imgIdtfy.py:124] - find image/l\8.png
+[INFO][2024-06-25 20:04:14][imgIdtfy.py:124] - find image/l\9.png
+[INFO][2024-06-25 20:04:15][imgIdtfy.py:124] - find image/l\x.png
+[ERROR][2024-06-25 20:04:15][main.py:57] - App startup failed!
+[ERROR][2024-06-25 20:04:15][main.py:58] - invalid literal for int() with base 10: 'x'
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 62, in startup
+    prompt = self.get_input()
+             ^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 107, in get_input
+    process_images("image/l", "l", config)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 126, in process_images
+    config[key].extend([int(label)] * len(matches))
+                        ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'x'
+[INFO][2024-06-25 20:04:33][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 20:04:33][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 20:04:33][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 20:04:34][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 20:04:34][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 20:04:37][imgIdtfy.py:124] - find image/l\4.png
+[INFO][2024-06-25 20:04:38][imgIdtfy.py:124] - find image/l\5.png
+[INFO][2024-06-25 20:04:40][imgIdtfy.py:124] - find image/l\8.png
+[INFO][2024-06-25 20:04:40][imgIdtfy.py:124] - find image/l\9.png
+[INFO][2024-06-25 20:04:40][imgIdtfy.py:124] - find image/l\x.png
+[ERROR][2024-06-25 20:04:40][main.py:57] - App startup failed!
+[ERROR][2024-06-25 20:04:40][main.py:58] - invalid literal for int() with base 10: 'x'
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 62, in startup
+    prompt = self.get_input()
+             ^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 107, in get_input
+    process_images("image/l", "l", config)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\interface_win\imgIdtfy.py", line 126, in process_images
+    config[key].extend([int(label)] * len(matches))
+                        ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'x'
+[INFO][2024-06-25 20:05:34][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 20:05:34][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 20:05:34][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 20:05:35][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 20:05:35][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 20:05:38][imgIdtfy.py:124] - find image/l\4.png
+[INFO][2024-06-25 20:05:38][imgIdtfy.py:124] - find image/l\5.png
+[INFO][2024-06-25 20:05:40][imgIdtfy.py:124] - find image/l\8.png
+[INFO][2024-06-25 20:05:41][imgIdtfy.py:124] - find image/l\9.png
+[INFO][2024-06-25 20:05:49][imgIdtfy.py:124] - find image/o\2.png
+[INFO][2024-06-25 20:05:49][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 20:05:49][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 20:05:50][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 20:05:50][imgIdtfy.py:124] - find image/o\6.png
+[INFO][2024-06-25 20:05:52][imgIdtfy.py:124] - find image/o\9.png
+[ERROR][2024-06-25 20:05:52][main.py:57] - App startup failed!
+[ERROR][2024-06-25 20:05:52][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 20:06:27][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 20:06:27][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 20:06:27][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 20:06:28][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 20:06:28][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 20:06:31][imgIdtfy.py:124] - find image/l\4.png
+[INFO][2024-06-25 20:06:31][imgIdtfy.py:124] - find image/l\5.png
+[INFO][2024-06-25 20:06:33][imgIdtfy.py:124] - find image/l\8.png
+[INFO][2024-06-25 20:06:34][imgIdtfy.py:124] - find image/l\9.png
+[INFO][2024-06-25 20:06:42][imgIdtfy.py:124] - find image/o\2.png
+[INFO][2024-06-25 20:06:42][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 20:06:43][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 20:06:43][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 20:06:44][imgIdtfy.py:124] - find image/o\6.png
+[INFO][2024-06-25 20:06:46][imgIdtfy.py:124] - find image/o\9.png
+[ERROR][2024-06-25 20:06:46][main.py:57] - App startup failed!
+[ERROR][2024-06-25 20:06:46][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined
+[INFO][2024-06-25 20:07:25][main.py:37] - begin 1 game, running...
+[INFO][2024-06-25 20:07:25][config.py:254] - [INIT] load config: {'channel_type': 'hlmj', 'model': 'gpt-4', 'open_ai_api_key': '', 'baidu_wenxin_api_key': 'Zc19H2myRjuOuhS9ZHyUbCuQ', 'baidu_wenxin_secret_key': 'WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h', 'text_to_image': 'dall-e-2', 'voice_to_text': 'openai', 'text_to_voice': 'openai', 'proxy': 'http://127.0.0.1:7890', 'hot_reload': False, 'single_chat_prefix': ['bot', '@bot'], 'single_chat_reply_prefix': '[bot] ', 'group_chat_prefix': ['@bot'], 'group_name_white_list': ['ChatGPT测试群', 'ChatGPT测试群2'], 'image_create_prefix': ['画'], 'speech_recognition': True, 'group_speech_recognition': False, 'voice_reply_voice': False, 'conversation_max_tokens': 2500, 'expires_in_seconds': 3600, 'character_desc': '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。', 'temperature': 0.7, 'subscribe_msg': '感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。', 'use_linkai': False, 'linkai_api_key': '', 'linkai_app_code': ''}
+[INFO][2024-06-25 20:07:25][config.py:202] - [Config] User datas loaded.
+[INFO][2024-06-25 20:07:26][hlmj_channel.py:56] - Detecting the game ...
+[INFO][2024-06-25 20:07:26][hlmj_channel.py:58] - Detecting the game successfully! Begin playing...
+[INFO][2024-06-25 20:07:29][imgIdtfy.py:124] - find image/l\4.png
+[INFO][2024-06-25 20:07:30][imgIdtfy.py:124] - find image/l\5.png
+[INFO][2024-06-25 20:07:32][imgIdtfy.py:124] - find image/l\8.png
+[INFO][2024-06-25 20:07:32][imgIdtfy.py:124] - find image/l\9.png
+[INFO][2024-06-25 20:07:40][imgIdtfy.py:124] - find image/o\2.png
+[INFO][2024-06-25 20:07:41][imgIdtfy.py:124] - find image/o\3.png
+[INFO][2024-06-25 20:07:41][imgIdtfy.py:124] - find image/o\4.png
+[INFO][2024-06-25 20:07:42][imgIdtfy.py:124] - find image/o\5.png
+[INFO][2024-06-25 20:07:42][imgIdtfy.py:124] - find image/o\6.png
+[INFO][2024-06-25 20:07:44][imgIdtfy.py:124] - find image/o\9.png
+[ERROR][2024-06-25 20:07:44][main.py:57] - App startup failed!
+[ERROR][2024-06-25 20:07:44][main.py:58] - name 'PluginManager' is not defined
+Traceback (most recent call last):
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 50, in run
+    start_channel(channel_name)
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\main.py", line 30, in start_channel
+    channel.startup()
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\hlmj\hlmj_channel.py", line 89, in startup
+    context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\fyn\Pro_Cod\vscode_python\llm-agent\channel\chat_channel.py", line 80, in _compose_context
+    e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
+                ^^^^^^^^^^^^^
+NameError: name 'PluginManager' is not defined

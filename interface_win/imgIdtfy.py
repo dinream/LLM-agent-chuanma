@@ -4,6 +4,33 @@ import pyautogui
 import os
 from common.log import logger
 
+def orb_feature_matching(screen, target_image, matches):
+    orb = cv2.ORB_create()
+
+    # 检测关键点和计算描述符
+    kp1, des1 = orb.detectAndCompute(target_image, None)
+    
+    refined_matches = []
+    for (center, h, w) in matches:
+        # 提取屏幕中对应区域
+        x, y = center[0] - w // 2, center[1] - h // 2
+        screen_patch = screen[y:y + h, x:x + w]
+
+        kp2, des2 = orb.detectAndCompute(screen_patch, None)
+        
+        if des2 is not None:
+            # 使用BFMatcher进行特征匹配
+            bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+            feature_matches = bf.match(des1, des2)
+
+            # 计算匹配率
+            match_rate = len(feature_matches) / len(kp1)
+            if match_rate > 0.175:  # 使用特征匹配进一步确认
+                refined_matches.append(center)
+    
+    return refined_matches
+
+
 
 def is_close(pt1, pt2, threshold=20):
     """
@@ -17,9 +44,9 @@ def is_close(pt1, pt2, threshold=20):
     return np.linalg.norm(np.array(pt1) - np.array(pt2)) < threshold
 
 
-def multi_scale_template_matching(screen, target_image, scales=None, threshold=0.9):
+def multi_scale_template_matching(screen, target_image, scales=None, threshold=0.8):
     if scales is None:
-        scales = [0.6, 0.7, 0.8,0.9, 1.0, 1.1, 1.2,1.3,1.4, 1.5]
+        scales = [0.7, 0.8,0.9, 1.0, 1.1, 1.2,1.3,1.4]
 
     for scale in scales:
         # 调整图像大小
@@ -29,8 +56,6 @@ def multi_scale_template_matching(screen, target_image, scales=None, threshold=0
         # 使用模板匹配
         result = cv2.matchTemplate(screen, resized_target, cv2.TM_CCOEFF_NORMED)
 
-
-
     #     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
 
     #     if max_val >= threshold:
@@ -39,19 +64,16 @@ def multi_scale_template_matching(screen, target_image, scales=None, threshold=0
     #         pyautogui.moveTo(target_center)
     #         return target_center, max_val
     # return 0, max_val
-
-
-        # logger.info("result:{}".format(result))
         matches = []
         loc = np.where(result >= threshold)
 
         for pt in zip(*loc[::-1]):  # 匹配位置的坐标
             target_center = (pt[0] + target_width // 2, pt[1] + target_height // 2)
             # 检查是否有接近的匹配点
-            if not any(is_close(target_center, match) for match in matches):
+            if not any(is_close(target_center, match[0]) for match in matches):
                 pyautogui.moveTo(target_center)
                 print("----------------{}------".format(scale))
-                matches.append(target_center)
+                matches.append((target_center, target_height, target_width))
         if len(matches) > 0:
             return matches
     return matches
@@ -78,11 +100,12 @@ def find_image_on_screen(target_image_path, threshold=0.8):
 
     matches = multi_scale_template_matching(screen, target_image, threshold=threshold)
     if len(matches)>0:
-        print(f"Found {len(matches)} matches for {target_image_path}")
-        return True, matches
+        rematches = orb_feature_matching(screen, target_image, matches)
+        print(f"Found {len(rematches)} matches for {target_image_path}")
+        return True, rematches
     else:
         print("Image not found on the screen.")
-        return False, matches
+        return False, []
 
 def process_images(folder_path, key, config):
     """
@@ -102,5 +125,14 @@ def process_images(folder_path, key, config):
                 label = os.path.splitext(filename)[0]
                 config[key].extend([int(label)] * len(matches))
 
-def click(target_center):
-    pyautogui.click(target_center)
+def click(target_center, offset_x=0, offset_y=0):
+    """
+    点击 target_center 位置，并根据提供的偏移量进行调整。
+
+    :param target_center: 中心点坐标 (x, y)
+    :param offset_x: x 轴方向的偏移量
+    :param offset_y: y 轴方向的偏移量
+    """
+    actual_x = target_center[0] + offset_x
+    actual_y = target_center[1] + offset_y
+    pyautogui.click(actual_x, actual_y)
