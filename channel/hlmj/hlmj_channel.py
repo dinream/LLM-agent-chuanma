@@ -111,21 +111,23 @@ class HLMJChannel(ChatChannel):
 
         # 处理 image/o 文件夹
         process_images("image/o", "o", config)
-        
-        #! 识别任务
-        istype,_ = find_image_on_screen("image/SelectType.png")
-        if istype:
-            self.curenv["CurTask"] = 1
 
-        istype,_ = find_image_on_screen("image/Touch.png")
-        if istype:
-            self.curenv["CurTask"] = 3
-        #! 识别玩家
-        istype,_ = find_image_on_screen("image/Player.png")
-        if istype:
-            self.curenv["CurTask"] = 2
-            self.curenv["CurPlayer"] = 1
+        self.curenv["CurTask"] = 0
+        while True:
+            #! 识别任务
+            break
+            istype,_ = find_image_on_screen("image/SelectType.png")
+            if istype:
+                self.curenv["CurTask"] = 1
+                break
+            istype,_ = find_image_on_screen("image/Touch.png")
+            if istype:
+                self.curenv["CurTask"] = 3
+            #! 识别玩家
+            istype,_ = find_image_on_screen("image/Player.png")
+            if istype:
+                self.curenv["CurTask"] = 2
+                self.curenv["CurPlayer"] = 1
 
-        sys.stdout.flush()
         json_string = json.dumps(self.curenv, indent=4)
         return json_string
