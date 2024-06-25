@@ -72,7 +72,7 @@ def multi_scale_template_matching(screen, target_image, scales=None, threshold=0
             # 检查是否有接近的匹配点
             if not any(is_close(target_center, match[0]) for match in matches):
                 pyautogui.moveTo(target_center)
-                print("----------------{}------".format(scale))
+                #print("----------------{}------".format(scale))
                 matches.append((target_center, target_height, target_width))
         if len(matches) > 0:
             return matches
@@ -99,13 +99,18 @@ def find_image_on_screen(target_image_path, threshold=0.8):
     # return False,target_center
 
     matches = multi_scale_template_matching(screen, target_image, threshold=threshold)
-    if len(matches)>0:
+    if len(matches)>1:
         rematches = orb_feature_matching(screen, target_image, matches)
         print(f"Found {len(rematches)} matches for {target_image_path}")
         return True, rematches
-    else:
-        print("Image not found on the screen.")
+    elif len(matches)<=0:
+        print(f"Image {target_image_path} not found on the screen.")
         return False, []
+    else:
+        print(f"Found 1  matches for {target_image_path}")
+        # print(matches[0][0])
+        return True, [matches[0][0]]
+        
 
 def process_images(folder_path, key, config):
     """
@@ -133,6 +138,7 @@ def click(target_center, offset_x=0, offset_y=0):
     :param offset_x: x 轴方向的偏移量
     :param offset_y: y 轴方向的偏移量
     """
+    # pyautogui.click(target_center)
     actual_x = target_center[0] + offset_x
     actual_y = target_center[1] + offset_y
     pyautogui.click(actual_x, actual_y)

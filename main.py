@@ -66,7 +66,7 @@ if __name__ == "__main__":
         # 剩余玩家
         # 已经出牌
         # 玩家手牌情况
-
+# TODO 别人出牌
     # 局内游戏
     while True:
         print("a") 

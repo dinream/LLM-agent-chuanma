@@ -5,6 +5,7 @@ wechat channel
 """
 
 
+import threading
 import time
 import sys
 import json
@@ -35,63 +36,59 @@ class HLMJChannel(ChatChannel):
                         4,4,4,4,4,4,4,4,4
                     ]
         self.curenv = {
+            "GameID":0,
             "MyMahjong": {"l": [], "w": [], "o": []}, # "l" 表示"杠"门牌; "w" 表示"万"门牌；"o" 表示"筒"门牌：元素 1-9 表示牌的大小
             "CurPlayer":1, # 表示当前是哪一个玩家的出牌环节。 1：本家；2：下家； 3:对家；4:上家
             "CurTask":0, # 0:非操作环节 1 ：选则缺门； 2：选择出牌： 3：是否碰牌
             }
+        self.gameID = 0
+
+    def newgame(self):
+        self.gameID = self.gameID +1
+        self.curenv = {
+            "GameID":0,
+            "MyMahjong": {"l": [], "w": [], "o": []},
+            "CurPlayer":1, 
+            "CurTask":0,
+            }
+        time.sleep(2)
+
 
     def startup(self):
         context = Context()
-        msg_id = 0
+        self.gameID = 0
         # 点击开始
-        
-            # 剩余玩家
-            # 已经出牌
-            # 玩家手牌情况
-        # 开始循环
         while True:
-            try:
-                while True:
+            while True:
+                # 循环检测是否开了游戏
+                try:
                     ishlmj,_ = find_image_on_screen("image/start.png")
-                    logger.info("Detecting the game ...")
+                    logger.info("Please open the game ...")
                     if ishlmj:
                         logger.info("Detecting the game successfully! Begin playing...")
+                        # game_thread = threading.Thread(target=self.game_thread)
+                        # game_thread.start()
                         break
-                    # time.sleep(1)
-                # 初始化状态
+                except KeyboardInterrupt:
+                    print("\nExiting the game...")
+                    sys.exit()
+
+            # 循环聊天
+            msg_id = 0
+            while True:
+                # 获取输入
                 prompt = self.get_input()
+                msg_id += 1
                 print(prompt)
-            except KeyboardInterrupt:
-                print("\nExiting...")
-                sys.exit()
-                # 点击开始
-
-                # 初始化状态
-                    # 剩余玩家
-                    # 已经出牌
-                    # 玩家手牌情况
-                # 开始循环
-
-            # 识别手牌
-            # 转换为文字信息
-            # 将每一次的手牌
-            # 对每一次别人出牌
-            # # 判别自己是否可以杠牌或者胡牌
-            # 对自己的出牌
-            # 结合历史出牌信息和当前的出牌信息向大模型请求下一次出牌请求
+                # 结合历史出牌信息和当前的出牌信息向大模型请求下一次出牌请求
+                context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
+                if context:
+                    self.produce(context)
+                else:
+                    raise Exception("context is None")
+            
             # 将出牌请求转换为鼠标动作
             # 验证最终出牌动作
-            msg_id += 1
-            trigger_prefixs = conf().get("single_chat_prefix", [""])
-            if check_prefix(prompt, trigger_prefixs) is None:
-                prompt = trigger_prefixs[0] + prompt  # 给没触发的消息加上触发前缀
-
-            context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
-            if context:
-                self.produce(context)
-            else:
-                raise Exception("context is None")
-
     # 统一的发送函数，每个Channel自行实现，根据reply的type字段发送不同类型的消息
     def send(self, reply: Reply, context: Context):
         print('test')
@@ -100,7 +97,55 @@ class HLMJChannel(ChatChannel):
         """
         Multi-line input function
         """
-        
+    
+        self.curenv["CurTask"] = 0
+        # 判断是否是新开局
+        while True:
+            #! 识别任务
+            while True:
+                #! 新游戏
+                # 开始游戏
+                istype, matches = find_image_on_screen("image/Begin.png")
+                if istype:  # 点击开始游戏
+                    click(matches[0])
+                    # print(matches[0])
+                    self.newgame()
+                    break
+                # 下一局
+                istype, matches = find_image_on_screen("image/Next.png")
+                if istype:  # 点击换对手
+                    click(matches[0])
+                    self.newgame()
+                    break
+                # 换对手
+                istype, matches = find_image_on_screen("image/Win.png")
+                if istype:  # 点击换对手
+                    click(matches[0], 0, 25)
+                    self.newgame()
+                    break
+                # 继续游戏
+                istype, matches = find_image_on_screen("image/Con.png")
+                if istype:  # 点击换对手
+                    click(matches[0])
+                    self.newgame()
+                    break
+            # 缺
+            istype,_ = find_image_on_screen("image/SelectType.png")
+            if istype:
+                self.curenv["CurTask"] = 1
+                break
+            # 碰 
+            istype,_ = find_image_on_screen("image/Touch.png")
+            if istype:
+                self.curenv["CurTask"] = 3
+                break
+            # 出
+            istype,_ = find_image_on_screen("image/Player.png")
+            if istype:
+                self.curenv["CurTask"] = 2
+                self.curenv["CurPlayer"] = 1
+                break
+            
         config = self.curenv["MyMahjong"]
         #! 识别手牌
         # 处理 image/l 文件夹
@@ -111,28 +156,28 @@ class HLMJChannel(ChatChannel):
 
         # 处理 image/o 文件夹
         process_images("image/o", "o", config)
-
-        self.curenv["CurTask"] = 0
-        while True:
-            # 结束
-            istype,matches = find_image_on_screen("image/Win.png")
-            if istype:
-                # 点击
-                break
-            
-            #! 识别任务
-            istype,_ = find_image_on_screen("image/SelectType.png")
-            if istype:
-                self.curenv["CurTask"] = 1
-                break
-            istype,_ = find_image_on_screen("image/Touch.png")
-            if istype:
-                self.curenv["CurTask"] = 3
-            #! 识别玩家
-            istype,_ = find_image_on_screen("image/Player.png")
-            if istype:
-                self.curenv["CurTask"] = 2
-                self.curenv["CurPlayer"] = 1
-
+        self.curenv["GameID"] = self.gameID
         json_string = json.dumps(self.curenv, indent=4)
         return json_string
+    
+
+
+
+    def game_thread(self):
+        # 判断是否是新开局
+        while True:
+            #! 新游戏
+            istype, matches = find_image_on_screen("image/Win.png")
+            if istype:  # 点击换对手
+                click(matches[0], 0, 25)
+                self.newgame()
+            istype, matches = find_image_on_screen("image/Next.png")
+            if istype:  # 点击下一局
+                click(matches[0])
+                self.newgame()
+            istype, matches = find_image_on_screen("image/Begin.png")
+            if istype:  # 点击开始游戏
+                click(matches[0])
+                self.newgame()
+            
+            time.sleep(3)
