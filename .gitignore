@@ -1,1 +1,7 @@
+./run.log
+*.pyc
+./*.log
 run.log
+channel/__pycache__/chat_channel.cpython-311.pyc
+channel/__pycache__/chat_channel.cpython-311.pyc
+config.json
