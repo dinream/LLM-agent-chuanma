@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import pyautogui
 import os
+import threading
 from common.log import logger
 
 def orb_feature_matching(screen, target_image, matches):
@@ -46,7 +47,7 @@ def is_close(pt1, pt2, threshold=20):
 
 def multi_scale_template_matching(screen, target_image, scales=None, threshold=0.8):
     if scales is None:
-        scales = [0.7, 0.8,0.9, 1.0, 1.1, 1.2,1.3,1.4]
+        scales = [0.8,0.9, 1.0, 1.1, 1.2]
 
     for scale in scales:
         # 调整图像大小
@@ -142,3 +143,76 @@ def click(target_center, offset_x=0, offset_y=0):
     actual_x = target_center[0] + offset_x
     actual_y = target_center[1] + offset_y
     pyautogui.click(actual_x, actual_y)
+
+
+def process_image(image_path, key, config, lock):
+    iffind, matches = find_image_on_screen(image_path)
+    if iffind:
+        # 提取标号（假设标号是文件名的一部分，不含扩展名）
+        logger.info("find {}".format(image_path))
+        label = os.path.splitext(os.path.basename(image_path))[0]
+        with lock:
+            config[key].extend([int(label)] * len(matches))
+
+
+def process_handimages_in_threads(config):
+    lock = threading.Lock()  # 用于确保线程安全地访问共享资源
+    threads = []
+    # # 处理 image/l 文件夹
+    # process_images("image/l", "l", config)
+
+    # # 处理 image/w 文件夹
+    # process_images("image/w", "w", config)
+
+    # # 处理 image/o 文件夹
+    # process_images("image/o", "o", config)
+    for folder_path in ["image/o","image/l","image/w"]:
+        key = folder_path[-1]
+        for filename in os.listdir(folder_path):
+            if filename.endswith((".png", ".jpg", ".jpeg")):
+                image_path = os.path.join(folder_path, filename)
+                thread = threading.Thread(target=process_image, args=(image_path, key, config, lock))
+                threads.append(thread)
+                thread.start()
+
+    for thread in threads:
+        thread.join()
+
+def process_task_image(image_path, key, config, lock):
+    iffind, matches = find_image_on_screen(image_path)
+    if iffind:
+        # 提取标号（假设标号是文件名的一部分，不含扩展名）
+        logger.info("find {}".format(image_path))
+        with lock:
+            config["CurTask"] = key
+
+def process_task_images_in_threads(config):
+    lock = threading.Lock()  # 用于确保线程安全地访问共享资源
+    threads = []
+
+    file_path ="image/SelectType.png"
+    thread = threading.Thread(target=process_task_image, args=(file_path, 1, config, lock))
+    threads.append(thread)
+    thread.start()
+    file_path ="image/Touch.png"
+    thread = threading.Thread(target=process_task_image, args=(file_path, 3, config, lock))
+    threads.append(thread)
+    thread.start()
+    file_path ="image/Player.png"
+    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
+    threads.append(thread)
+    thread.start()
+    file_path ="image/Player1.png"
+    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
+    threads.append(thread)
+    thread.start()
+    file_path ="image/Player2.png"
+    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
+    threads.append(thread)
+    thread.start()
+    # file_path ="image/Player3.png"
+    # thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
+    # threads.append(thread)
+    # thread.start()
+    for thread in threads:
+        thread.join()

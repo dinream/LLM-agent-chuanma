@@ -11,7 +11,7 @@ from config import load_config
 from channel import channel_factory 
 from common.log import logger
 from common import const
-
+from channel.chat_channel import ChatChannel
 def sigterm_handler_wrap(_signo):
     old_handler = signal.getsignal(_signo)
 
@@ -59,24 +59,21 @@ def run():
 
 if __name__ == "__main__":
     run()
-    target_image_path = 'image/invite1.png'  # 替换为目标图像的路径
-    # 点击开始
+#     ch = ChatChannel()
+#     content = "```json\n{\n    \"Touch\": false,\n    \"SelectType\": \"o\",\n    \"SelectOne\": {\"l\": [], \"w\": [], \"o\": []}\n}\n```"
+#     dic = ch._decode_content(content)
+#     
+#     new_cont = """
+# {
+#     \"Touch\": false,
+#     \"SelectType\": \"o\",
+#     \"SelectOne\": {\"l\": [], \"w\": [], \"o\": []} 
     
+# }
+# """
+#     dic = ch._decode_content(new_cont)
+
     # 初始化状态
         # 剩余玩家
         # 已经出牌
         # 玩家手牌情况
-# TODO 别人出牌
-    # 局内游戏
-    while True:
-        print("a") 
-        # 识别手牌
-        # 转换为文字信息
-        # 将每一次的手牌
-        # 对每一次别人出牌
-        # # 判别自己是否可以杠牌或者胡牌
-        # 对自己的出牌
-        # 结合历史出牌信息和当前的出牌信息向大模型请求下一次出牌请求
-        # 将出牌请求转换为鼠标动作
-        # 验证最终出牌动作
-        break

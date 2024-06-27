@@ -20,7 +20,7 @@ class TokenBucket:
                 if self.tokens < self.capacity:
                     self.tokens += 1
                 self.cond.notify()  # 通知获取令牌的线程
-            time.sleep(1 / self.rate)
+            # time.sleep(1 / self.rate)
 
     def get_token(self):
         """获取令牌"""

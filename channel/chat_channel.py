@@ -1,7 +1,7 @@
 import os
 import re
 import threading
-import time
+import json
 from asyncio import CancelledError
 from concurrent.futures import Future, ThreadPoolExecutor
 from concurrent import futures
@@ -42,3 +42,21 @@ class ChatChannel(Channel):
     def _generate_reply(self, context: Context, reply: Reply = Reply()) -> Reply:
         reply = super().build_reply_content(context.content, context)
         return reply
+    
+    def _decode_content(self,content) -> dict:
+        # 去除 Markdown 代码块标记
+        json_str = content.replace('```json\n', '').replace('```', '').strip()
+        print(json_str)
+        print(type(json_str))
+
+        content_dict = {}
+        # 将 JSON 字符串解析为字典
+        try:
+            content_dict = json.loads(json_str)
+            print(content_dict)
+        except json.JSONDecodeError as e:
+            print(f"JSON解析错误: {e}")
+
+        # 打印解析结果
+        # print(content_dict)
+        return content_dict

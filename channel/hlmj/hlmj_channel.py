@@ -51,135 +51,169 @@ class HLMJChannel(ChatChannel):
             "CurPlayer":1, 
             "CurTask":0,
             }
-        time.sleep(2)
-
+        # time.sleep(2)
 
     def startup(self):
         context = Context()
         self.gameID = 0
+        # process_handimages_in_threads( {"l": [], "w": [], "o": []})
+        # config = self.curenv["MyMahjong"]
+        # process_handimages_in_threads(config)
+        # prompt =  json.dumps(self.curenv, indent=4)
+        # print("-------------" +prompt)
+        # return 
         # 点击开始
         while True:
             while True:
                 # 循环检测是否开了游戏
-                break # 测试 api
+                #! 测试 api break 
                 try:
-                    ishlmj,_ = find_image_on_screen("image/start.png")
+                    ishlmj,matches = find_image_on_screen("image/start.png")
                     logger.info("Please open the game ...")
-                    if ishlmj:
+                    if ishlmj and len(matches)>0:
+                        click(matches[0])
                         logger.info("Detecting the game successfully! Begin playing...")
-                        # game_thread = threading.Thread(target=self.game_thread)
-                        # game_thread.start()
                         break
                 except KeyboardInterrupt:
                     print("\nExiting the game...")
                     sys.exit()
-
+            lock = threading.Lock()  # 用于确保线程安全地访问共享资源
+            threads = []
+            for image_path in ["image/Over_ok.png","image/Begin.png","image/Next.png","image/winn.png","image/1Con.png"]:
+                thread = threading.Thread(target=self.process_NewGame_image, args=(image_path, lock))
+                threads.append(thread)
+                thread.start()
             # 循环聊天
             msg_id = 0
             while True:
                 # 获取输入
-                # 测试api prompt = self.get_input()
-                prompt =  json.dumps(self.curenv, indent=4)
                 msg_id += 1
-                print(prompt)
+                prompt = self.get_input()
+                #! 测试api prompt =  json.dumps(self.curenv, indent=4)
+                # print(prompt)
+                reply= None
+                reply_dict = None
                 # 结合历史出牌信息和当前的出牌信息向大模型请求下一次出牌请求
+                
                 context = self._compose_context(ContextType.TEXT, prompt, msg=HLMJMessage(msg_id, prompt))
                 if context:
-                    self._generate_reply(context)
+                    reply = self._generate_reply(context)
                 else:
                     raise Exception("context is None")
-                time.sleep(10)
-            # 将出牌请求转换为鼠标动作
-            # 验证最终出牌动作
-    # 统一的发送函数，每个Channel自行实现，根据reply的type字段发送不同类型的消息
-    def send(self, reply: Reply, context: Context):
-        print('test')
+                if reply:
+                    reply_dict =self._decode_content(reply.content)
+                    self.process_reply(reply_dict)
+                else:
+                    raise Exception("reply's content is None")
+                    break
+            for thread in threads:
+                thread.join()
 
-    def get_input(self):
-        """
-        Multi-line input function
-        """
-    
-        self.curenv["CurTask"] = 0
-        # 判断是否是新开局
-        while True:
-            #! 识别任务
-            while True:
-                #! 新游戏
-                # 开始游戏
-                istype, matches = find_image_on_screen("image/Begin.png")
+    def process_reply(self, reply_dict):
+        # #! 测试 识别
+        # reply_dict = json.loads(read_file("./test.json"))
+        # self.curenv["CurTask"] =2
+        if reply_dict:
+            if self.curenv["CurTask"] == 1: # 缺
+                key = ""
+                if "SelectType" in reply_dict:
+                    key = reply_dict["SelectType"]
+                else:
+                    key = get_key_with_min_elements(self.curenv["MyMahjong"])
+                if key != "":
+                    istype, matches = find_image_on_screen("image/"+key+".png")
+                    if istype:  # 点击缺门
+                        click(matches[0])
+            elif self.curenv["CurTask"] == 2: # 出
+                path = ""
+                if "SelectOne" in reply_dict:
+                    key = find_first_non_empty_key(reply_dict["SelectOne"])
+                    if key:
+                        path = "image/"+key+"/"+str(reply_dict["SelectOne"][key][0])+".png"
+                else:
+                    key = find_first_non_empty_key(self.curenv["MyMahjong"])
+                    if key:
+                        path = "image/"+key+"/"+str(self.curenv["MyMahjong"][key][0])+".png"
+                if path != "":
+                    istype, matches = find_image_on_screen(path)
+                    if istype and len(matches)>0:  # 点击出牌
+                        click(matches[0])
+                        click(matches[0])
+            elif self.curenv["CurTask"] == 3: # 碰
+                tch = False
+                if "Touch" in reply_dict:
+                    tch = reply_dict["Touch"]
+                if tch:
+                    istype, matches = find_image_on_screen("image/Touch-ok.png")
+                    if istype:  # 点击开始游戏
+                        click(matches[0])
+                istype, matches = find_image_on_screen("image/Pass.png")
                 if istype:  # 点击开始游戏
                     click(matches[0])
-                    # print(matches[0])
-                    self.newgame()
-                    break
-                # 下一局
-                istype, matches = find_image_on_screen("image/Next.png")
-                if istype:  # 点击换对手
-                    click(matches[0])
-                    self.newgame()
-                    break
-                # 换对手
-                istype, matches = find_image_on_screen("image/Win.png")
-                if istype:  # 点击换对手
-                    click(matches[0], 0, 25)
-                    self.newgame()
-                    break
-                # 继续游戏
-                istype, matches = find_image_on_screen("image/1Con.png")
-                if istype:  # 点击换对手
-                    click(matches[0])
-                    self.newgame()
-                    break
+
+
+    def get_input(self):
+        self.curenv["CurTask"] = 0
+        self.curenv["MyMahjong"] = {"l": [], "w": [], "o": []}
+        self.curenv["GameID"] = self.gameID
+        # 判断是否是新开局
+        while self.curenv["CurTask"] == 0:
             # 缺
-            istype,_ = find_image_on_screen("image/SelectType.png")
-            if istype:
-                self.curenv["CurTask"] = 1
-                break
-            # 碰 
-            istype,_ = find_image_on_screen("image/Touch.png")
-            if istype:
-                self.curenv["CurTask"] = 3
-                break
-            # 出
-            istype,_ = find_image_on_screen("image/Player.png")
-            if istype:
-                self.curenv["CurTask"] = 2
-                self.curenv["CurPlayer"] = 1
-                break
+            process_task_images_in_threads(self.curenv)
+            # istype,_ = find_image_on_screen("image/SelectType.png")
+            # if istype:
+            #     self.curenv["CurTask"] = 1
+            #     break
+            # # 碰 
+            # istype,_ = find_image_on_screen("image/Touch.png")
+            # if istype:
+            #     self.curenv["CurTask"] = 3
+            #     break
+            # # 出
+            # istype,_ = find_image_on_screen("image/Player.png")
+            # if istype:
+            #     self.curenv["CurTask"] = 2
+            #     break
             
         config = self.curenv["MyMahjong"]
         #! 识别手牌
-        # 处理 image/l 文件夹
-        process_images("image/l", "l", config)
-
-        # 处理 image/w 文件夹
-        process_images("image/w", "w", config)
-
-        # 处理 image/o 文件夹
-        process_images("image/o", "o", config)
-        self.curenv["GameID"] = self.gameID
+        process_handimages_in_threads(config)
         json_string = json.dumps(self.curenv, indent=4)
         return json_string
     
+    def process_NewGame_image(self, image_path, lock):
+        iffind, matches = find_image_on_screen(image_path)
+        if iffind:
+            click(matches[0])
+            with lock:
+                self.newgame()
+
+def get_key_with_min_elements(d):
+    # 初始化一个变量来存储最小长度和对应的键
+    min_key = None
+    min_length = float('inf')
+
+    # 遍历字典中的键和值
+    for key, value in d.items():
+        # 检查当前列表的长度是否比当前最小长度小
+        if len(value) < min_length:
+            min_length = len(value)
+            min_key = key
+
+    return min_key
+
+def find_first_non_empty_key(d):
+    # 遍历字典中的键和值
+    for key, value in d.items():
+        # 检查当前列表是否包含元素
+        if len(value) > 0:
+            return key
+    # 如果所有的列表都是空的，返回 None 或者其他指示值
+    return None
+
+def read_file(path):
+    with open(path, mode="r", encoding="utf-8") as f:
+        return f.read()
+    
 
 
-
-    def game_thread(self):
-        # 判断是否是新开局
-        while True:
-            #! 新游戏
-            istype, matches = find_image_on_screen("image/Win.png")
-            if istype:  # 点击换对手
-                click(matches[0], 0, 25)
-                self.newgame()
-            istype, matches = find_image_on_screen("image/Next.png")
-            if istype:  # 点击下一局
-                click(matches[0])
-                self.newgame()
-            istype, matches = find_image_on_screen("image/Begin.png")
-            if istype:  # 点击开始游戏
-                click(matches[0])
-                self.newgame()
-            
-            time.sleep(3)
