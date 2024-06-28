@@ -41,16 +41,20 @@ class HLMJChannel(ChatChannel):
             "CurPlayer":1, # 表示当前是哪一个玩家的出牌环节。 1：本家；2：下家； 3:对家；4:上家
             "CurTask":0, # 0:非操作环节 1 ：选则缺门； 2：选择出牌： 3：是否碰牌
             }
+        self.isnew = False
         self.gameID = 0
 
     def newgame(self):
         self.gameID = self.gameID +1
+        self.isnew = True
         self.curenv = {
             "GameID":0,
             "MyMahjong": {"l": [], "w": [], "o": []},
             "CurPlayer":1, 
-            "CurTask":0,
+            "CurTask": 1,
             }
+
+
         # time.sleep(2)
 
     def startup(self):
@@ -61,14 +65,18 @@ class HLMJChannel(ChatChannel):
         # process_handimages_in_threads(config)
         # prompt =  json.dumps(self.curenv, indent=4)
         # print("-------------" +prompt)
+        # self.process_reply({})
         # return 
         # 点击开始
         while True:
             while True:
                 # 循环检测是否开了游戏
                 #! 测试 api break 
+                # prompt = self.get_input()
+                # print(prompt)
+                # return
                 try:
-                    ishlmj,matches = find_image_on_screen("image/start.png")
+                    ishlmj,matches = find_image_on_screen_reigion("image/start.png",(887, 132, 325, 46))
                     logger.info("Please open the game ...")
                     if ishlmj and len(matches)>0:
                         click(matches[0])
@@ -83,6 +91,15 @@ class HLMJChannel(ChatChannel):
                 thread = threading.Thread(target=self.process_NewGame_image, args=(image_path, lock))
                 threads.append(thread)
                 thread.start()
+            for thread in threads:
+                thread.join()
+
+            if self.isnew:
+                iffind = False
+                matches = None
+                while not iffind:
+                    iffind, matches = find_image_on_screen_reigion("image/SelectType.png",(459, 791, 1251, 397))
+                time.sleep(1)
             # 循环聊天
             msg_id = 0
             while True:
@@ -106,23 +123,24 @@ class HLMJChannel(ChatChannel):
                 else:
                     raise Exception("reply's content is None")
                     break
-            for thread in threads:
-                thread.join()
+
 
     def process_reply(self, reply_dict):
         # #! 测试 识别
         # reply_dict = json.loads(read_file("./test.json"))
-        # self.curenv["CurTask"] =2
+        # self.curenv["CurTask"] =1
         if reply_dict:
             if self.curenv["CurTask"] == 1: # 缺
                 key = ""
+                
                 if "SelectType" in reply_dict:
                     key = reply_dict["SelectType"]
                 else:
                     key = get_key_with_min_elements(self.curenv["MyMahjong"])
                 if key != "":
-                    istype, matches = find_image_on_screen("image/"+key+".png")
+                    istype, matches = find_image_on_screen_reigion("image/"+key+".png",(459, 791, 1251, 397))
                     if istype:  # 点击缺门
+                        print("click image/"+key+".png")
                         click(matches[0])
             elif self.curenv["CurTask"] == 2: # 出
                 path = ""
@@ -135,7 +153,7 @@ class HLMJChannel(ChatChannel):
                     if key:
                         path = "image/"+key+"/"+str(self.curenv["MyMahjong"][key][0])+".png"
                 if path != "":
-                    istype, matches = find_image_on_screen(path)
+                    istype, matches = find_image_on_screen_reigion(path,(11, 1059, 2110, 310) )
                     if istype and len(matches)>0:  # 点击出牌
                         click(matches[0])
                         click(matches[0])
@@ -144,37 +162,23 @@ class HLMJChannel(ChatChannel):
                 if "Touch" in reply_dict:
                     tch = reply_dict["Touch"]
                 if tch:
-                    istype, matches = find_image_on_screen("image/Touch-ok.png")
+                    istype, matches = find_image_on_screen_reigion("image/Touch-ok.png",(1160, 911, 954, 291))
                     if istype:  # 点击开始游戏
                         click(matches[0])
-                istype, matches = find_image_on_screen("image/Pass.png")
+                istype, matches = find_image_on_screen_reigion("image/Pass.png",(1160, 911, 954, 291))
                 if istype:  # 点击开始游戏
                     click(matches[0])
+        self.curenv["CurTask"] = 0
 
 
     def get_input(self):
-        self.curenv["CurTask"] = 0
+        #  self.curenv["CurTask"] = 0
         self.curenv["MyMahjong"] = {"l": [], "w": [], "o": []}
         self.curenv["GameID"] = self.gameID
         # 判断是否是新开局
         while self.curenv["CurTask"] == 0:
             # 缺
             process_task_images_in_threads(self.curenv)
-            # istype,_ = find_image_on_screen("image/SelectType.png")
-            # if istype:
-            #     self.curenv["CurTask"] = 1
-            #     break
-            # # 碰 
-            # istype,_ = find_image_on_screen("image/Touch.png")
-            # if istype:
-            #     self.curenv["CurTask"] = 3
-            #     break
-            # # 出
-            # istype,_ = find_image_on_screen("image/Player.png")
-            # if istype:
-            #     self.curenv["CurTask"] = 2
-            #     break
-            
         config = self.curenv["MyMahjong"]
         #! 识别手牌
         process_handimages_in_threads(config)
@@ -182,11 +186,12 @@ class HLMJChannel(ChatChannel):
         return json_string
     
     def process_NewGame_image(self, image_path, lock):
-        iffind, matches = find_image_on_screen(image_path)
+        iffind, matches = find_image_on_screen_reigion(image_path,(10, 824, 2113, 480))
         if iffind:
             click(matches[0])
             with lock:
                 self.newgame()
+                
 
 def get_key_with_min_elements(d):
     # 初始化一个变量来存储最小长度和对应的键

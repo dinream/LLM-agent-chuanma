@@ -35,7 +35,7 @@ class ChatChannel(Channel):
         if "origin_ctype" not in context:
             context["origin_ctype"] = ctype
         #context["openai_api_key"] = user_data.get("openai_api_key")
-        context["gpt_model"] = "gpt-3.5-turbo"
+        # context["gpt_model"] = "gpt-3.5-turbo"
         return context
 
 

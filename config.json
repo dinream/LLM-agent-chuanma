@@ -2,25 +2,15 @@
     "channel_type": "hlmj",
 
     "model": "gpt-4",
-    "open_ai_api_key": "",
-
-    "baidu_wenxin_api_key":"Zc19H2myRjuOuhS9ZHyUbCuQ",
-    "baidu_wenxin_secret_key":"WDExzPtPb3j9lMcXz2hJ2nq8u6dY9g8h",
-    
-    "text_to_image": "dall-e-2",
-    "voice_to_text": "openai",
-    "text_to_voice": "openai",
+    "open_ai_api_key": "sk-api1-tvdDYxB",
     "proxy": "http://127.0.0.1:7890",
     "hot_reload": false,
     "speech_recognition": true,
     "group_speech_recognition": false,
     "voice_reply_voice": false,
     "conversation_max_tokens": 2500,
-    "expires_in_seconds": 3600,
-    "character_desc": "你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。",
+    "expires_in_seconds": 36000,
+    "character_desc": "\n# 背景\n你是一个专业川麻大师，你正在参加一个四川麻将比赛，模式为“血战到底”，你需要在游戏中保证获胜的前提下，尽量获得更好的胡牌。\n关键规则：\n1. 只能碰不能吃。\n2. 打缺，即开局需要选择一种牌型，胡牌时不能包含该类型的牌。\n# 输入格式\n稍后我会持续向你发送当前游戏的数据，格式为 json 格式，参考如下：\n```json\n{\n    \"GameID\":0,\n    \"MyMahjong\": {\n        \"l\": [],\n        \"w\": [],\n        \"o\": []\n    },\n    \"CurPlayer\": 1,\n    \"CurTask\": 1\n}\n```\n其中：\n1. \"GameID\"数字类型，表示当前是第几局游戏。每一局游戏都是独立的。\n2. \"MyMahjong\"字典类型，是当前手牌统计：\"l\" 表示\"杠\"门牌; \"w\" 表示\"万\"门牌；\"o\" 表示\"筒\"门牌。三者中给的元素为数字1-9 \n3. \"CurPlayer\" 数字类型，表示当前是哪一个玩家执行操作。1：本家；2：下家； 3:对家；4:上家\n4. \"CurTask\": 数字类型表示本家所处的环节。0：非操作环节； 1 ：选则缺门； 2：选择出牌； 3：是否碰牌\n# 响应格式\n\n响应格式为json ，参考如下：\n```json\n{\n    \"Touch\": true,\n    \"SelectType\": \"o\",\n    \"SelectOne\": {\"l\": [], \"w\": [], \"o\": []} \n}\n```\n对于输入\"CurTask\"的每一个类型，你的返回字段中只需要包含 Touch SelectType SelectOne 三个字段中的一个，其中：\n1. \"Touch\" 为 bool 类型，表示是否执行碰牌操作。\n2. \"SelectType\" 为 字符串类型，表示本局选择哪一种作为缺门，\"l\" 表示\"杠\"门牌; \"w\" 表示\"万\"门牌；\"o\" 表示\"筒\"门牌。\n3. \"SelectOne\": 表示出那一张牌，比如出 3万时，其值为 {\"l\": [], \"w\": [3], \"o\": []} \n# 重要提示：\n1. 你的响应数据中只应该包含 json 数据，不要包含其他任何格式内容。\n2. 你的目的是分析当前局势并赢得游戏，并赢得更多的积分，但是你不需要输出这些分析过程，只需要输出我规定的内容以及格式。\n3. 返回字段中只需要包含 Touch SelectType SelectOne 三个字段中的一个。\n4. 4. 注意选择 SelectType 牌型之后，一定要在胡牌之前吧对应的牌型全部出完。\n",
     "temperature": 0.7,
-    "subscribe_msg": "感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。",
-    "use_linkai": false,
-    "linkai_api_key": "",
-    "linkai_app_code": ""
+    "subscribe_msg": "感谢您的关注！\n这里是AI智能助手，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。"
 }

@@ -80,7 +80,34 @@ def multi_scale_template_matching(screen, target_image, scales=None, threshold=0
     return matches
 
 
+def find_image_on_screen_reigion(target_image_path, region, threshold=0.8):
+    # 读取目标图像并转换为灰度图像
+    target_image = cv2.imread(target_image_path, cv2.IMREAD_GRAYSCALE)
 
+    # 截取屏幕图像并转换为灰度图像
+    screen = pyautogui.screenshot(region=region)
+    screen = cv2.cvtColor(np.array(screen), cv2.COLOR_RGB2GRAY)
+
+    matches = multi_scale_template_matching(screen, target_image, threshold=threshold)
+    
+    if len(matches) > 1:
+        rematches = orb_feature_matching(screen, target_image, matches)
+        # print(f"Found {len(rematches)} matches for {target_image_path}")
+        # 将区域的左上角坐标加到匹配结果上
+        rematches = [(match[0] + region[0], match[1] + region[1]) for match in rematches]
+        return True, rematches
+    elif len(matches) <= 0:
+        # print(f"Image {target_image_path} not found on the screen.")
+        return False, []
+    else:
+        # print(f"Found 1 match for {target_image_path}")
+        # print(f"--------- {(matches[0])}")
+        # 将区域的左上角坐标加到匹配结果上
+        match_center = matches[0][0]
+        match = (match_center[0] + region[0], match_center[1] + region[1])
+        # print(f"--------- {match}")
+        return True, [match]
+        
 def find_image_on_screen(target_image_path, threshold=0.8):
     # 读取目标图像并转换为灰度图像
     target_image = cv2.imread(target_image_path, cv2.IMREAD_GRAYSCALE)
@@ -113,7 +140,7 @@ def find_image_on_screen(target_image_path, threshold=0.8):
         return True, [matches[0][0]]
         
 
-def process_images(folder_path, key, config):
+def process_images(folder_path, key, config, region):
     """
     遍历文件夹，检查图片是否在屏幕上存在，并更新配置字典。
     
@@ -124,7 +151,7 @@ def process_images(folder_path, key, config):
     for filename in os.listdir(folder_path):
         if filename.endswith((".png", ".jpg", ".jpeg")):
             image_path = os.path.join(folder_path, filename)
-            iffind,matches = find_image_on_screen(image_path)
+            iffind,matches = find_image_on_screen_reigion(image_path,region)
             if iffind:
                 # 提取标号（假设标号是文件名的一部分，不含扩展名）
                 logger.info("find {}".format(image_path))
@@ -145,8 +172,8 @@ def click(target_center, offset_x=0, offset_y=0):
     pyautogui.click(actual_x, actual_y)
 
 
-def process_image(image_path, key, config, lock):
-    iffind, matches = find_image_on_screen(image_path)
+def process_image(image_path, key, config, region, lock):
+    iffind, matches = find_image_on_screen_reigion(image_path, region)
     if iffind:
         # 提取标号（假设标号是文件名的一部分，不含扩展名）
         logger.info("find {}".format(image_path))
@@ -171,15 +198,15 @@ def process_handimages_in_threads(config):
         for filename in os.listdir(folder_path):
             if filename.endswith((".png", ".jpg", ".jpeg")):
                 image_path = os.path.join(folder_path, filename)
-                thread = threading.Thread(target=process_image, args=(image_path, key, config, lock))
+                thread = threading.Thread(target=process_image, args=(image_path, key, config, (11, 1059, 2110, 310), lock))
                 threads.append(thread)
                 thread.start()
 
     for thread in threads:
         thread.join()
 
-def process_task_image(image_path, key, config, lock):
-    iffind, matches = find_image_on_screen(image_path)
+def process_task_image(image_path, key, config,region, lock):
+    iffind, matches = find_image_on_screen_reigion(image_path,region)
     if iffind:
         # 提取标号（假设标号是文件名的一部分，不含扩展名）
         logger.info("find {}".format(image_path))
@@ -190,29 +217,29 @@ def process_task_images_in_threads(config):
     lock = threading.Lock()  # 用于确保线程安全地访问共享资源
     threads = []
 
-    file_path ="image/SelectType.png"
-    thread = threading.Thread(target=process_task_image, args=(file_path, 1, config, lock))
-    threads.append(thread)
-    thread.start()
+    # file_path ="image/SelectType.png"
+    # thread = threading.Thread(target=process_task_image, args=(file_path, 1, config, lock))
+    # threads.append(thread)
+    # thread.start()
     file_path ="image/Touch.png"
-    thread = threading.Thread(target=process_task_image, args=(file_path, 3, config, lock))
+    thread = threading.Thread(target=process_task_image, args=(file_path, 3, config,(1160, 911, 954, 291), lock))
     threads.append(thread)
     thread.start()
     file_path ="image/Player.png"
-    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
+    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config,(840, 593, 469, 234), lock))
     threads.append(thread)
     thread.start()
     file_path ="image/Player1.png"
-    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
+    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config,(840, 593, 469, 234), lock))
     threads.append(thread)
     thread.start()
     file_path ="image/Player2.png"
-    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
+    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, (840, 593, 469, 234), lock))
     threads.append(thread)
     thread.start()
-    # file_path ="image/Player3.png"
-    # thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, lock))
-    # threads.append(thread)
-    # thread.start()
+    file_path ="image/Player3.png"
+    thread = threading.Thread(target=process_task_image, args=(file_path, 2, config, (840, 593, 469, 234), lock))
+    threads.append(thread)
+    thread.start()
     for thread in threads:
         thread.join()

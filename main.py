@@ -5,6 +5,8 @@ import sys
 import time 
 import threading
 
+import pyautogui
+
 
 from config import conf
 from config import load_config
@@ -29,10 +31,32 @@ def start_channel(channel_name: str):
     channel = channel_factory.create_channel(channel_name)
     channel.startup()
 
+def get_mouse_position():
+    print("请移动鼠标到矩形区域的左上角，然后按下 'Enter'")
+    input()  # 等待用户按下 Enter
+    x1, y1 = pyautogui.position()
+    print(f"左上角坐标: ({x1}, {y1})")
+
+    print("请移动鼠标到矩形区域的右下角，然后按下 'Enter'")
+    input()  # 等待用户按下 Enter
+    x2, y2 = pyautogui.position()
+    print(f"右下角坐标: ({x2}, {y2})")
+
+    width = x2 - x1
+    height = y2 - y1
+
+    print(f"指定区域的范围: ({x1}, {y1}, {width}, {height})")
 
 
-
+# (11, 1059, 2110, 310)  手牌
+# 玩家阶段 (840, 593, 469, 234)
+# 杠牌区域 (1160, 911, 954, 291)
+# hlmj (887, 132, 325, 46)
+# 新游戏(183, 436, 1696, 919)
+# 缺 (572, 856, 964, 302)
 def run():
+    # get_mouse_position()
+    # return 
     try:
         logger.info("begin {} game, running...".format('1'))
         # ctrl + c
@@ -48,10 +72,6 @@ def run():
             channel_name = "terminal"
 
         start_channel(channel_name)
-
-        while True:
-            time.sleep(1)
-            print('a')
 
     except Exception as e:
         logger.error("App startup failed!")

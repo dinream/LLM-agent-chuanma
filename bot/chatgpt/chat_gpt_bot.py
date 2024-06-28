@@ -68,6 +68,8 @@ class ChatGPTBot(Bot, OpenAIImage):
 
             api_key = context.get("openai_api_key")
             model = context.get("gpt_model")
+            # logger.info(f"[CHATGPT] context-------{model}")
+            # exit()
             new_args = None
             if model:
                 new_args = self.args.copy()
